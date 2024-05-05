@@ -4,7 +4,7 @@ using Microsoft.ML.Data;
 var mlContext = new MLContext();
 
 IDataView dataView = mlContext.Data.LoadFromTextFile<SentimentData>(
-    path: "/Users/piotrpenza/sentiment-analisys-repo/SentimentApp/dataset.tsv",
+    path: "/path/to/dataset.tsv",
     hasHeader: true,
     separatorChar: '\t');
 
