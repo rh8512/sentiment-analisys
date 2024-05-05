@@ -4,7 +4,7 @@ using Microsoft.ML.Data;
 var mlContext = new MLContext();
 
 IDataView dataView = mlContext.Data.LoadFromTextFile<SentimentData>(
-    path: "/path/to/dataset.tsv",
+    path: "/Users/piotrpenza/sentiment-analisys-repo/SentimentApp/dataset.tsv",
     hasHeader: true,
     separatorChar: '\t');
 
@@ -14,7 +14,7 @@ IDataView testData = trainTestSplit.TestSet;
 
 var dataProcessPipeline = mlContext.Transforms.Text.FeaturizeText(outputColumnName: "Features", inputColumnName: nameof(SentimentData.SentimentText));
 
-var trainer = mlContext.BinaryClassification.Trainers.AveragedPerceptron(labelColumnName: "Label", featureColumnName: "Features");
+var trainer = mlContext.BinaryClassification.Trainers.SdcaLogisticRegression(labelColumnName: "Label", featureColumnName: "Features");
 var trainingPipeline = dataProcessPipeline.Append(trainer);
 
 ITransformer trainedModel = trainingPipeline.Fit(trainingData);
